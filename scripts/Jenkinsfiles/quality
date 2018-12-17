@@ -23,13 +23,13 @@ def runQualityTests() {
             url: 'git@github.com:edx/edx-platform.git']]]
 
         sh "bash scripts/all-tests.sh"
-        stash includes: '**/reports/**/*, **/reports/**/*', name: "${TEST_SUITE}-${SHARD}-reports"
+        stash includes: '**/reports/**/*', name: "${TEST_SUITE}-${SHARD}-reports"
     }
 }
 
 def qualityTestCleanup() {
     archiveArtifacts allowEmptyArchive: true, artifacts: '**/reports/**/*,test_root/log/**/*.log,*.log'
-    junit '**/reports/quality.xml, reports/quality_junitxml/*.xml'
+    junit 'reports/quality_junitxml/*.xml'
 }
 
 pipeline {
@@ -177,7 +177,7 @@ pipeline {
             // Check for warnings
             warnings canComputeNew: false, canResolveRelativePaths: false, canRunOnFailed: true, categoriesPattern: '',
                 defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '',
-                parserConfigurations: [[parserName: 'Pep8', pattern: 'reports/pep8/pep8.report'], [parserName: 'Pep8', pattern: 'reports/**/pylint.report']],
+                parserConfigurations: [[parserName: 'Pep8', pattern: 'reports/pep8/pep8.report'], [parserName: 'PyLint', pattern: 'reports/**/pylint.report']],
                 unHealthy: ''
             // Publish Quality report
             publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true,
