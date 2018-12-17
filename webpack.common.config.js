@@ -410,7 +410,7 @@ module.exports = Merge.smart({
                 {
                     test: /\.(js|jsx)$/,
                     include: [
-                        /node_modules\/@edx/
+                        /node_modules\//
                     ],
                     use: 'babel-loader'
                 }
