@@ -201,7 +201,6 @@ class GradingPage(SettingsPage):
             lambda: self.q(css='#course-grading-graceperiod').attrs('value')[0] == '00:00',
             "Initial value of grace period is 00:00"
         )
-        # return self.q(css='#course-grading-graceperiod').attrs('value')[0]
         # self.q(css='#course-grading-graceperiod').fill(grace_time_value)
         selector = '#course-grading-graceperiod'
         script = "$(arguments[0]).val(arguments[1]).change();"
@@ -215,9 +214,9 @@ class GradingPage(SettingsPage):
         # )
         # script_for_scroll = "$('.action-save')[0].scrollIntoView();"
         # self.browser.execute_script(script_for_scroll)
-        self.wait_for_ajax()
-        self.wait_for_element_visibility('.action-save', 'Save button is present')
-        # assert self.q(css='#course-grading-graceperiod').attrs('value')[0] == '01:99' or '48:00'
+        #self.wait_for_ajax()
+        #self.wait_for_element_visibility('.action-save', 'Save button is present')
+        assert self.q(css='#course-grading-graceperiod').attrs('value')[0] == '01:99' or '48:00'
         self.save()
 
     @property
